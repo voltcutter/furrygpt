@@ -22,39 +22,41 @@ var messages = [];
 
 async function demo() {
     circle.style.visibility = "hidden";
-    promptBox.style.visibility = "hidden";
+    // promptBox.style.visibility = "hidden";
     settingsBackground.style.visibility = "hidden";
 
-    document.onkeydown = async function(event) {
+    promptInput.onkeydown = async function(event) {
         event = event || window.event;
         var keyCode = event.keyCode || event.which;
         if (!usingSettings) {
-            if (!event.ctrlKey && !event.altKey && keyCode !== 8 && keyCode !== 9 && keyCode !== 13) {
-                if (!usingPromptBox){
-                    usingPromptBox = true;
-                    apikey = apikeyInput.value;
-                    promptBox.style.visibility = "visible";
-                    // promptBox.classList.add("scaleUpAndAppear");
-                    promptInput.focus();
-                }
-            }
-            if (keyCode == 27) { //escape key
-                usingPromptBox = false;
-                promptBox.style.visibility = "hidden";
-                // promptBox.classList.add("scaleDownAndDisappear");
-            }
+            // if (!event.ctrlKey && !event.altKey && keyCode !== 8 && keyCode !== 9 && keyCode !== 13) {
+            //     if (!usingPromptBox){
+            //         usingPromptBox = true;
+            //         apikey = apikeyInput.value;
+            //         promptBox.style.visibility = "visible";
+            //         // promptBox.classList.add("scaleUpAndAppear");
+            //         promptInput.focus();
+            //     }
+            // }
+            // if (keyCode == 27) { //escape key
+            //     usingPromptBox = false;
+            //     promptBox.style.visibility = "hidden";
+            //     // promptBox.classList.add("scaleDownAndDisappear");
+            // }
             if (keyCode == 13) { //enter key
                 if (!event.shiftKey) {
+                    event.preventDefault();
                     if (!answering)
                     {
+                        scrollToBottom();
                         apikey = apikeyInput.value;
-                        usingPromptBox = false;
-                        promptBox.style.visibility = "hidden";
+                        // usingPromptBox = false;
+                        // promptBox.style.visibility = "hidden";
                         // promptBox.classList.add("scaleDownAndDisappear");
                         // await clearResponseContainer();
-                        
-                        await getResponseStreaming(promptInput.value);
+                        let userPrompt = promptInput.value;
                         promptInput.value = "";
+                        await getResponseStreaming(userPrompt);
                     }
                 }
             }
@@ -79,6 +81,7 @@ async function clearResponseContainer() {
 }
 
 async function getResponseStreaming(prompt) {
+    promptInput.value = "";
     scrollToBottom();
     let userPromptContainer = document.createElement("div");
     userPromptContainer.classList.add("responseContainer");
