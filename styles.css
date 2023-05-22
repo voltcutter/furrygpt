@@ -372,7 +372,7 @@ input[type=text]:focus {
     font-size: 100%;
 }
 
-.button {
+button {
     /* z-index: 3; */
     align-self: center;
     
@@ -390,7 +390,7 @@ input[type=text]:focus {
 
     transition: 0.05s;
 }
-.button:active {
+button:active {
     transform: scale(0.8);
 }
 
