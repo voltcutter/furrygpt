@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"/>
+    <title>FurryGPT</title>
+    <link rel="icon" type="image/x-icon" href="paw.png">
+</head>
+<body>
+    <!-- <p class="center">Really long text Really long text Really long text Really long text Really long text </p> -->
+    
+    <div class="mainResponseContainer" id="mainResponseContainer">
+        <div class="responseContainer" id="furrygptResponseContainer">
+            <img src="furrygptav.png" style="height: 50px; float: left; border-radius: 50%; margin-right: 10px; border-style: solid; border-color: #000000; border-width: 2px;">
+            <span class="boldtext">FurryGPT</span><br>
+            <span class="furrygptResponse">Hewwo there! Mwy name is FurryGPT. I'm a warge wanguage modew developed by OpenPaws. Pweasure to make uwu acquaintance! :3</span>
+        </div>
+    </div>
+
+    <div class="promptBoxContainer" id="promptBox">
+        <div class="roundRect">
+            <!-- <input class="promptInput" type="text" id="promptInput" autocomplete="off"> -->
+            <textarea class="promptInput" id="promptInput"></textarea>
+        </div>
+        <div style="position: absolute; align-content: center; left: 50%; bottom: 30%; box-sizing: border-box;" id="pulsatingCircle">
+            <div class="pulsatingCircle"></div>
+        </div>
+    </div>
+
+    <button class="button" onclick="showSettings();" style="position: fixed; left: 10px">
+        <img src="settings.svg" style="width: 25px;">
+    </button>
+    <button class="button" onclick="clearConversation();" style="position: fixed; left: 60px">
+        <img src="broom.png" style="width: 25px">
+        <span style="font-size: 100%;">Clear Conversation</span>
+    </button>
+    <div class="settingsOverlayBackground" id="settingsOverlayBackground">
+        <div class="settingsOverlayWindow">
+            <!-- <div class="center"> -->
+                <button class="button" onclick="hideSettings();">
+                    <img src="close.png" style="width: 25px; height: 25px">
+                </button>
+            <!-- </div> -->
+            
+            <br>
+            <p class="label">API Key:</p><input type="text" value="anonymous" id="apikey">
+            <button class="button" onclick="document.getElementById('apikey').value='anonymous';">Anon?</button>
+        </div>
+    </div>
+
+    <button class="errorContainer" id="errorContainer" onclick="dismissError();" style="visibility: hidden;">
+        <span class="plaintext" style="display: inline-block; color: #ffffff; overflow:hidden" id="errorText">Error</span>
+    </button>
+
+<script src="script.js"></script>
+</body>
+</html>
