@@ -3,7 +3,7 @@ function sleep(milliseconds)
     return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
-var apiRoot = "https://2019-66-220-192-74.ngrok-free.app";
+var apiRoot = "https://ddb0-67-216-55-7.ngrok-free.app";
 
 var furrygptConversationContainer = document.getElementById("mainResponseContainer");
 var furrygptResponseContainer = document.getElementById("furrygptResponseContainer");
@@ -13,6 +13,7 @@ var circle = document.getElementById("pulsatingCircle");
 var settingsBackground = document.getElementById("settingsOverlayBackground");
 var apikeyInput = document.getElementById("apikey");
 var apikey = apikeyInput.value;
+var apiRootElement = document.getElementById("apiBase");
 
 var usingPromptBox = false;
 var answering = false;
@@ -50,6 +51,7 @@ async function demo() {
                     {
                         scrollToBottom();
                         apikey = apikeyInput.value;
+                        apiRoot = apiRootElement.value;
                         // usingPromptBox = false;
                         // promptBox.style.visibility = "hidden";
                         // promptBox.classList.add("scaleDownAndDisappear");
@@ -98,6 +100,7 @@ async function getResponseStreaming(prompt) {
 
     let data = {
         messages: messages,
+        stream: true
     }
     let headers = {
         'Content-Type': 'application/json',
@@ -127,14 +130,22 @@ async function getResponseStreaming(prompt) {
         if (done) break;
         
         const decodedValue = new TextDecoder("utf-8").decode(value);
+        let extractedContent = null;
+        try {
+            extractedContent = JSON.parse(decodedValue)["choices"][0]["delta"]["content"];
+        }
+        catch(errorMessage) {
+            console.log(errorMessage);
+            continue;
+        }
+        
         console.log(decodedValue);
 
         let newChild = document.createElement("span");
-        newChild.innerHTML = decodedValue;
+        newChild.innerHTML = extractedContent;
         newChild.classList.add("furrygptResponseFadeIn");
-        // newChild.classList.add("scaleUpAndAppear");
         furrygptResponseContainer.appendChild(newChild);
-        currentText += decodedValue;
+        currentText += extractedContent;
         scrollToBottom();
     }
 
