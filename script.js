@@ -14,6 +14,10 @@ var settingsBackground = document.getElementById("settingsOverlayBackground");
 var apikeyInput = document.getElementById("apikey");
 var apikey = apikeyInput.value;
 var apiRootElement = document.getElementById("apiBase");
+var modelInput = document.getElementById("model");
+var model = modelInput.value;
+var furryModeToggle = document.getElementById("furryModeToggle");
+var furryMode = furryModeToggle.checked;
 
 var usingPromptBox = false;
 var answering = false;
@@ -58,6 +62,8 @@ async function demo() {
                         // await clearResponseContainer();
                         let userPrompt = promptInput.value;
                         promptInput.value = "";
+                        model = modelInput.value;
+                        furryMode = furryModeToggle.checked;
                         await getResponseStreaming(userPrompt);
                     }
                 }
@@ -100,7 +106,9 @@ async function getResponseStreaming(prompt) {
 
     let data = {
         messages: messages,
-        stream: true
+        stream: true,
+        model: model,
+        furry: furryMode
     }
     let headers = {
         'Content-Type': 'application/json',
