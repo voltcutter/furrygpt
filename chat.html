@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello, world!</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="static/styles.css">
+    <link rel="stylesheet" href="static/typing_symbol.css">
+    <script src="{{url_for('static', filename='chat.js')}}"></script>
+</head>
+<body>
+    <button style="margin-left: auto;"id="loginButton">Logout</button><span id="username"></span>
+    <div class="messagesContainer" id="messagesContainer"></div>
+    <div class="inputContainer">
+        <button class="button tertiary smallbutton halfrightmargin" id="clearButton"><img src="{{url_for('static', filename='broom.png')}}" style="width: 30px;"></button>
+        <div style="position: relative">
+            <button class="button tertiary smallbutton" id="moreButton"><img src="{{url_for('static', filename='plussign.png')}}" id="moreSymbol" style="width: 30px; margin-right: 5px;"></button>
+            <div style="width: 70px; visibility: hidden; position: absolute; bottom: 70px; display: flex; flex-direction: column-reverse;" id="moreElements">
+                <div>
+                    <button class="button tertiary smallbutton verticalmargin" id="sendImage" title="Send FurryGPT an image or video."><img src="{{url_for('static', filename='image.png')}}" style="width: 30px;" id="imageInputIcon"></button>    
+                    <input type="file" id="fileInput" style="display: none;">
+                </div>
+                <button class="button tertiary smallbutton verticalmargin" id="sendWebsite" title="Let FurryGPT visit a website and read it."><img src="{{url_for('static', filename='chainlink.png')}}" style="width: 30px;"></button>
+                <button class="button tertiary smallbutton verticalmargin" id="sendSearch" title="Let FurryGPT search and gather information."><img src="{{url_for('static', filename='magnifying_glass.png')}}" style="width: 30px;"></button>
+            </div>
+        </div>
+        
+        <textarea class="messageInput" id="messageInput"></textarea>
+        <button class="button primary smallbutton" id="sendButton"><img src="{{url_for('static', filename='paperairplane.png')}}" style="width: 30px;"></button>
+    </div>
+    
+</body>
+</html>
